@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.psicologobrasiliadf.com/sitemap.xml
+
+# Block common non-content paths
+Disallow: /admin/
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/temp/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /*.json$
+Disallow: /*?*

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes Psicológicos de Rastreio | Psicólogo André Lemos</title>
+    <meta name="description" content="Realize testes psicológicos de rastreio online gratuitos. Avalie TDAH, Autismo, Ansiedade, Depressão e outros transtornos. Ferramentas validadas para autoavaliação.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <h1>André Lemos - Psicólogo Clínico CRP 01/14042</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="sobre-mim.html">Sobre mim:</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="agendamento.html">Agendamento Automático de Consultas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="avaliacoes.html">Avaliações:</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="servicos.html">Serviços</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="testes.html">Testes Psicológicos de Rastreio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="artigos.html">Artigos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="instagram.html">Instagram</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Testes Psicológicos de Rastreio</h1>
+                    <p class="hero-subtitle">Clique no botão abaixo para acessar nossos testes de rastreio, incluindo TDAH, Autismo e outros.</p>
+                    <div class="hero-buttons">
+                        <a href="#testes-disponiveis" class="btn btn-primary btn-lg">Acessar Testes</a>
+                        <a href="agendamento.html" class="btn btn-outline-light btn-lg">Agendar Avaliação</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/testes-hero.jpg" alt="Testes Psicológicos" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Notice -->
+    <section class="notice-section py-4 bg-warning">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-warning mb-0" role="alert">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Aviso Importante</h5>
+                        <p class="mb-0">Estes testes são ferramentas de rastreio e não substituem uma avaliação psicológica profissional. Os resultados devem ser discutidos com um psicólogo qualificado para diagnóstico adequado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tests Section -->
+    <section class="tests-section py-5" id="testes-disponiveis">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Testes Disponíveis</h2>
+            
+            <div class="row">
+                <!-- TDAH Test -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="test-card">
+                        <div class="test-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>TDAH</h3>
+                        <h4>Transtorno de Déficit de Atenção e Hiperatividade</h4>
+                        <p>Teste de rastreio para identificar sintomas de TDAH em adultos e crianças. Avalia atenção, hiperatividade e impulsividade.</p>
+                        <div class="test-details">
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Duração: 10-15 minutos</li>
+                                <li><i class="fas fa-users"></i> Para: Adultos e Crianças</li>
+                                <li><i class="fas fa-check-circle"></i> Baseado em critérios DSM-5</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('tdah')">Fazer Teste de TDAH</button>
+                    </div>
+                </div>
+
+                <!-- Autism Test -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="test-card">
+                        <div class="test-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h3>Autismo</h3>
+                        <h4>Transtorno do Espectro Autista (TEA)</h4>
+                        <p>Avaliação de traços autistas em adultos e crianças. Identifica características relacionadas à comunicação social e comportamento.</p>
+                        <div class="test-details">
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Duração: 15-20 minutos</li>
+                                <li><i class="fas fa-users"></i> Para: Adultos e Crianças</li>
+                                <li><i class="fas fa-check-circle"></i> Baseado em escalas AQ</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('autismo')">Fazer Teste de Autismo</button>
+                    </div>
+                </div>
+
+                <!-- Anxiety Test -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="test-card">
+                        <div class="test-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Ansiedade</h3>
+                        <h4>Escala de Ansiedade de Beck (BAI)</h4>
+                        <p>Avaliação dos sintomas de ansiedade e sua intensidade. Identifica diferentes tipos de transtornos de ansiedade.</p>
+                        <div class="test-details">
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Duração: 5-10 minutos</li>
+                                <li><i class="fas fa-users"></i> Para: Adolescentes e Adultos</li>
+                                <li><i class="fas fa-check-circle"></i> Escala validada internacionalmente</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('ansiedade')">Fazer Teste de Ansiedade</button>
+                    </div>
+                </div>
+
+                <!-- Depression Test -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="test-card">
+                        <div class="test-icon">
+                            <i class="fas fa-heart-broken"></i>
+                        </div>
+                        <h3>Depressão</h3>
+                        <h4>Inventário de Depressão de Beck (BDI)</h4>
+                        <p>Avaliação dos sintomas depressivos e sua gravidade. Ajuda a identificar necessidade de intervenção profissional.</p>
+                        <div class="test-details">
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Duração: 10-15 minutos</li>
+                                <li><i class="fas fa-users"></i> Para: Adolescentes e Adultos</li>
+                                <li><i class="fas fa-check-circle"></i> Amplamente utilizado clinicamente</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('depressao')">Fazer Teste de Depressão</button>
+                    </div>
+                </div>
+
+                <!-- Stress Test -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="test-card">
+                        <div class="test-icon">
+                            <i class="fas fa-tired"></i>
+                        </div>
+                        <h3>Estresse</h3>
+                        <h4>Escala de Estresse Percebido (PSS)</h4>
+                        <p>Avaliação do nível de estresse percebido nas últimas semanas. Identifica áreas de preocupação e necessidade de manejo.</p>
+                        <div class="test-details">
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Duração: 5 minutos</li>
+                                <li><i class="fas fa-users"></i> Para: Adolescentes e Adultos</li>
+                                <li><i class="fas fa-check-circle"></i> Foco no estresse recente</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('estresse')">Fazer Teste de Estresse</button>
+                    </div>
+                </div>
+
+                <!-- Self-Esteem Test -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="test-card">
+                        <div class="test-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Autoestima</h3>
+                        <h4>Escala de Autoestima de Rosenberg</h4>
+                        <p>Avaliação da autoestima e autovalorização. Identifica padrões de pensamento sobre si mesmo.</p>
+                        <div class="test-details">
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Duração: 5 minutos</li>
+                                <li><i class="fas fa-users"></i> Para: Adolescentes e Adultos</li>
+                                <li><i class="fas fa-check-circle"></i> Mede autoestima global</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary w-100" onclick="startTest('autoestima')">Fazer Teste de Autoestima</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Como Funciona</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Escolha o Teste</h4>
+                        <p>Selecione o teste de rastreio mais adequado para suas preocupações atuais.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Responda Honestamente</h4>
+                        <p>Leia cada questão cuidadosamente e responda com total honestidade para resultados mais precisos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Receba Resultados</h4>
+                        <p>Obtenha uma análise inicial e recomendações sobre próximos passos, incluindo quando procurar ajuda profissional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Modal -->
+    <div class="modal fade" id="testModal" tabindex="-1" aria-labelledby="testModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="testModalLabel">Teste Psicológico</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="testContent">
+                        <!-- Test content will be loaded here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="nextQuestionBtn">Próxima</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultsModalLabel">Resultados do Teste</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="resultsContent">
+                        <!-- Results will be displayed here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <a href="agendamento.html" class="btn btn-primary">Agendar Consulta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Precisa de uma avaliação profissional?</h2>
+            <p class="lead mb-4">Os testes de rastreio são úteis, mas não substituem uma avaliação completa com um psicólogo</p>
+            <div class="cta-buttons">
+                <a href="agendamento.html" class="btn btn-primary btn-lg me-3">Agendar Avaliação</a>
+                <a href="tel:+55-61992558044" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-phone"></i> Fale Conosco
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 André Lemos - Psicólogo Clínico CRP 01/14042. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Desenvolvido com <i class="fas fa-heart text-danger"></i> para cuidar da sua saúde mental</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+
+    <style>
+        .notice-section {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .test-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .test-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .test-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .test-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-card h4 {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .test-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .test-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .test-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .test-details li {
+            padding: 0.5rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .test-details i {
+            color: #3498db;
+            width: 20px;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step-card h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .step-card p {
+            color: #666;
+            margin: 0;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .question-container {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-label:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 1rem;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .result-low {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result-medium {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .result-high {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .test-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+
+    <script>
+        // Test data
+        const testData = {
+            tdah: {
+                title: "Teste de Rastreio para TDAH",
+                questions: [
+                    {
+                        question: "Com que frequência você tem dificuldade em prestar atenção em detalhes ou comete erros por descuido?",
+                        options: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
+                    },
+                    {
+                        question: "Com que frequência você tem dificuldade em manter a atenção em tarefas ou atividades?",
+                        options: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
+                    },
+                    {
+                        question: "Com que frequência você parece não estar ouvindo quando alguém fala diretamente com você?",
+                        options: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
+                    },
+                    {
+                        question: "Com que frequência você tem dificuldade em organizar tarefas e atividades?",
+                        options: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
+                    },
+                    {
+                        question: "Com que frequência você evita ou não gosta de tarefas que exigem esforço mental contínuo?",
+                        options: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
+                    }
+                ]
+            },
+            ansiedade: {
+                title: "Escala de Ansiedade de Beck (BAI)",
+                questions: [
+                    {
+                        question: "Nas últimas duas semanas, com que frequência você se sentiu nervoso(a) ou ansioso(a)?",
+                        options: ["Nenhuma vez", "Vários dias", "Mais da metade dos dias", "Quase todos os dias"]
+                    },
+                    {
+                        question: "Nas últimas duas semanas, com que frequência você não conseguiu parar de se preocupar?",
+                        options: ["Nenhuma vez", "Vários dias", "Mais da metade dos dias", "Quase todos os dias"]
+                    },
+                    {
+                        question: "Nas últimas duas semanas, com que frequência você se preocupou excessivamente sobre diferentes coisas?",
+                        options: ["Nenhuma vez", "Vários dias", "Mais da metade dos dias", "Quase todos os dias"]
+                    },
+                    {
+                        question: "Nas últimas duas semanas, com que frequência você teve dificuldade em relaxar?",
+                        options: ["Nenhuma vez", "Vários dias", "Mais da metade dos dias", "Quase todos os dias"]
+                    },
+                    {
+                        question: "Nas últimas duas semanas, com que frequência você se sentiu tão agitado(a) que era difícil ficar parado(a)?",
+                        options: ["Nenhuma vez", "Vários dias", "Mais da metade dos dias", "Quase todos os dias"]
+                    }
+                ]
+            }
+        };
+
+        let currentTest = null;
+        let currentQuestion = 0;
+        let answers = [];
+
+        function startTest(testType) {
+            currentTest = testType;
+            currentQuestion = 0;
+            answers = [];
+            
+            const test = testData[testType];
+            if (!test) {
+                alert('Teste em desenvolvimento. Em breve estará disponível.');
+                return;
+            }
+            
+            document.getElementById('testModalLabel').textContent = test.title;
+            showQuestion();
+            
+            const modal = new bootstrap.Modal(document.getElementById('testModal'));
+            modal.show();
+        }
+
+        function showQuestion() {
+            const test = testData[currentTest];
+            const question = test.questions[currentQuestion];
+            
+            let html = `
+                <div class="progress-bar-container">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: ${(currentQuestion + 1) / test.questions.length * 100}%"></div>
+                    </div>
+                    <p class="text-center mt-2">Questão ${currentQuestion + 1} de ${test.questions.length}</p>
+                </div>
+                <div class="question-container">
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">
+            `;
+            
+            question.options.forEach((option, index) => {
+                html += `
+                    <label class="option-label">
+                        <input type="radio" name="answer" value="${index}">
+                        <span>${option}</span>
+                    </label>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('testContent').innerHTML = html;
+            
+            // Update button text
+            const nextBtn = document.getElementById('nextQuestionBtn');
+            if (currentQuestion === test.questions.length - 1) {
+                nextBtn.textContent = 'Finalizar Teste';
+            } else {
+                nextBtn.textContent = 'Próxima';
+            }
+        }
+
+        function nextQuestion() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            
+            if (!selectedOption) {
+                alert('Por favor, selecione uma resposta.');
+                return;
+            }
+            
+            answers.push(parseInt(selectedOption.value));
+            currentQuestion++;
+            
+            const test = testData[currentTest];
+            
+            if (currentQuestion < test.questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const testModal = bootstrap.Modal.getInstance(document.getElementById('testModal'));
+            testModal.hide();
+            
+            // Calculate score
+            const totalScore = answers.reduce((sum, answer) => sum + answer, 0);
+            const maxScore = testData[currentTest].questions.length * (testData[currentTest].questions[0].options.length - 1);
+            const percentage = (totalScore / maxScore) * 100;
+            
+            let resultClass, resultTitle, resultText, recommendation;
+            
+            if (percentage < 30) {
+                resultClass = 'result-low';
+                resultTitle = 'Baixo Risco';
+                resultText = 'Seus resultados indicam baixa probabilidade de apresentar sintomas significativos.';
+                recommendation = 'Continue monitorando sua saúde mental e não hesite em procurar ajuda se sentir necessidade.';
+            } else if (percentage < 60) {
+                resultClass = 'result-medium';
+                resultTitle = 'Risco Moderado';
+                resultText = 'Seus resultados indicam alguns sintomas que merecem atenção.';
+                recommendation = 'Recomendamos uma avaliação profissional para discutir seus sintomas e receber orientação adequada.';
+            } else {
+                resultClass = 'result-high';
+                resultTitle = 'Alto Risco';
+                resultText = 'Seus resultados indicam sintomas significativos que requerem atenção profissional.';
+                recommendation = 'É altamente recomendável agendar uma consulta com um psicólogo para avaliação completa e tratamento adequado.';
+            }
+            
+            const resultsHtml = `
+                <div class="result-card ${resultClass}">
+                    <h3>${resultTitle}</h3>
+                    <p class="lead">Pontuação: ${totalScore} de ${maxScore} (${percentage.toFixed(1)}%)</p>
+                    <p>${resultText}</p>
+                </div>
+                <div class="recommendation-section">
+                    <h4>Recomendações:</h4>
+                    <p>${recommendation}</p>
+                    <div class="alert alert-info">
+                        <strong>Lembre-se:</strong> Este é um teste de rastreio e não substitui um diagnóstico profissional. 
+                        Uma avaliação completa com um psicólogo qualificado é essencial para diagnóstico adequado.
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('resultsContent').innerHTML = resultsHtml;
+            
+            const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+            resultsModal.show();
+        }
+
+        // Event listener for next button
+        document.getElementById('nextQuestionBtn').addEventListener('click', nextQuestion);
+    </script>
+</body>
+</html>
