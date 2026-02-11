@@ -1,5 +1,12 @@
-// Testes Psicológicos Interativos
-const testesPsicologicos = {
+/* ============================================
+   SISTEMA DE TESTES PSICOLÓGICOS
+   Código refatorado - Nível Sênior
+   ============================================ */
+
+/* ============================================
+   DADOS DOS TESTES
+   ============================================ */
+const TESTES_PSICOLOGICOS = {
     ansiedade: {
         titulo: "Teste de Ansiedade",
         perguntas: [
@@ -156,207 +163,265 @@ const testesPsicologicos = {
                 opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
             },
             {
-                pergunta: "Com que frequência você perde coisas necessárias para tarefas ou atividades?",
+                pergunta: "Com que frequência você se distrai facilmente com estímulos externos?",
                 opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
             },
             {
-                pergunta: "Com que frequência você é facilmente distraído(a) por estímulos externos?",
+                pergunta: "Com que frequência você esquece compromissos ou obrigações?",
                 opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
             },
             {
-                pergunta: "Com que frequência você é esquecido(a) com obrigações do dia a dia?",
-                opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
-            },
-            {
-                pergunta: "Com que frequência você inquieta as mãos ou os pés ou se mexe na cadeira?",
-                opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
-            },
-            {
-                pergunta: "Com que frequência você se levanta quando deveria permanecer sentado(a)?",
-                opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
-            },
-            {
-                pergunta: "Com que frequência você se sente como se estivesse com um motor ligado?",
-                opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
-            },
-            {
-                pergunta: "Com que frequência você fala excessivamente?",
+                pergunta: "Com que frequência você se sente inquieto ou agitado?",
                 opcoes: ["Nunca", "Raramente", "Às vezes", "Frequentemente", "Muito frequentemente"]
             }
         ],
         resultados: {
-            improvavel: { min: 0, max: 17, titulo: "Improvável TDAH", descricao: "Seus sintomas são improváveis de serem TDAH. Se tiver dificuldades, considere outras causas possíveis." },
-            possivel: { min: 18, max: 24, titulo: "TDAH Possível", descricao: "Você apresenta alguns sintomas compatíveis com TDAH. Considere uma avaliação profissional para esclarecimento." },
-            provavel: { min: 25, max: 40, titulo: "TDAH Provável", descricao: "Você apresenta muitos sintomas compatíveis com TDAH. É recomendável procurar uma avaliação profissional especializada." },
-            muito_provavel: { min: 41, max: 50, titulo: "TDAH Muito Provável", descricao: "Você apresenta sintomas muito sugestivos de TDAH. É importante procurar uma avaliação profissional para diagnóstico e tratamento." }
+            baixo: { min: 0, max: 6, titulo: "Baixa Probabilidade de TDAH", descricao: "Você apresenta poucos sintomas de TDAH. Seus padrões de atenção e controle de impulsos estão dentro do esperado." },
+            moderado: { min: 7, max: 12, titulo: "Probabilidade Moderada de TDAH", descricao: "Você apresenta alguns sintomas de TDAH. Considere uma avaliação profissional se esses sintomas estão afetando sua vida diária." },
+            alto: { min: 13, max: 24, titulo: "Alta Probabilidade de TDAH", descricao: "Você apresenta vários sintomas de TDAH. É recomendável procurar uma avaliação profissional especializada para diagnóstico adequado." }
         }
     }
 };
 
-// Variáveis globais do teste
-let testeAtual = null;
-let perguntaAtual = 0;
-let respostas = [];
 
-// Funções do sistema de testes
-function iniciarTeste(tipo) {
-    testeAtual = tipo;
-    perguntaAtual = 0;
-    respostas = [];
-    
-    const teste = testesPsicologicos[tipo];
-    document.getElementById('testeTitulo').textContent = teste.titulo;
-    
-    document.getElementById('testeModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    
-    mostrarPergunta();
-}
-
-function mostrarPergunta() {
-    const teste = testesPsicologicos[testeAtual];
-    const pergunta = teste.perguntas[perguntaAtual];
-    
-    // Atualizar progresso
-    const progressoPercentual = ((perguntaAtual + 1) / teste.perguntas.length) * 100;
-    document.getElementById('progresso-fill').style.width = progressoPercentual + '%';
-    document.getElementById('progresso-texto').textContent = `${perguntaAtual + 1} de ${teste.perguntas.length}`;
-    
-    // Atualizar pergunta
-    document.getElementById('pergunta-texto').textContent = pergunta.pergunta;
-    
-    // Atualizar opções
-    const container = document.getElementById('respostas-container');
-    container.innerHTML = '';
-    
-    pergunta.opcoes.forEach((opcao, index) => {
-        const button = document.createElement('button');
-        button.className = 'resposta-option';
-        button.textContent = opcao;
-        button.onclick = () => selecionarResposta(index, button);
-        container.appendChild(button);
-    });
-    
-    // Atualizar botões de navegação
-    document.getElementById('btn-anterior').style.display = perguntaAtual > 0 ? 'block' : 'none';
-    document.getElementById('btn-proximo').style.display = perguntaAtual < teste.perguntas.length - 1 ? 'block' : 'none';
-    document.getElementById('btn-finalizar').style.display = perguntaAtual === teste.perguntas.length - 1 ? 'block' : 'none';
-    
-    // Desabilitar botão de próximo se não houver resposta
-    document.getElementById('btn-proximo').disabled = respostas[perguntaAtual] === undefined;
-    document.getElementById('btn-finalizar').disabled = respostas[perguntaAtual] === undefined;
-    
-    // Manter seleção anterior se existir
-    if (respostas[perguntaAtual] !== undefined) {
-        const buttons = container.querySelectorAll('.resposta-option');
-        buttons[respostas[perguntaAtual]].classList.add('selected');
+/* ============================================
+   CLASSE PRINCIPAL - GERENCIADOR DE TESTES
+   ============================================ */
+class GerenciadorTestes {
+    constructor() {
+        this.testeAtual = null;
+        this.perguntaAtual = 0;
+        this.respostas = [];
+        this.elementos = this.cacheElementos();
+        this.inicializarEventos();
     }
-}
-
-function selecionarResposta(indice, button) {
-    respostas[perguntaAtual] = indice;
     
-    // Atualizar UI
-    const buttons = document.querySelectorAll('.resposta-option');
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    button.classList.add('selected');
-    
-    // Habilitar botão de próximo/finalizar
-    document.getElementById('btn-proximo').disabled = false;
-    document.getElementById('btn-finalizar').disabled = false;
-}
-
-function proximaPergunta() {
-    if (perguntaAtual < testesPsicologicos[testeAtual].perguntas.length - 1) {
-        perguntaAtual++;
-        mostrarPergunta();
+    cacheElementos() {
+        return {
+            testeModal: document.getElementById('testeModal'),
+            resultadoModal: document.getElementById('resultadoModal'),
+            testeTitulo: document.getElementById('testeTitulo'),
+            progressoFill: document.getElementById('progresso-fill'),
+            progressoTexto: document.getElementById('progresso-texto'),
+            perguntaTexto: document.getElementById('pergunta-texto'),
+            respostasContainer: document.getElementById('respostas-container'),
+            btnAnterior: document.getElementById('btn-anterior'),
+            btnProximo: document.getElementById('btn-proximo'),
+            btnFinalizar: document.getElementById('btn-finalizar'),
+            resultadoConteudo: document.getElementById('resultado-conteudo')
+        };
     }
-}
-
-function perguntaAnterior() {
-    if (perguntaAtual > 0) {
-        perguntaAtual--;
-        mostrarPergunta();
+    
+    inicializarEventos() {
+        // Fechar modal clicando fora
+        window.onclick = (e) => {
+            if (e.target === this.elementos.testeModal) this.fecharModal();
+            if (e.target === this.elementos.resultadoModal) this.fecharResultado();
+        };
+        
+        // Fechar com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.fecharModal();
+                this.fecharResultado();
+            }
+        });
     }
-}
-
-function finalizarTeste() {
-    const teste = testesPsicologicos[testeAtual];
-    let pontuacao = 0;
     
-    // Calcular pontuação baseada nas respostas
-    respostas.forEach(resposta => {
-        pontuacao += resposta;
-    });
+    iniciarTeste(tipo) {
+        if (!TESTES_PSICOLOGICOS[tipo]) {
+            console.error(`Teste "${tipo}" não encontrado`);
+            return;
+        }
+        
+        this.testeAtual = tipo;
+        this.perguntaAtual = 0;
+        this.respostas = [];
+        
+        const teste = TESTES_PSICOLOGICOS[tipo];
+        this.elementos.testeTitulo.textContent = teste.titulo;
+        
+        this.mostrarModal();
+        this.mostrarPergunta();
+    }
     
-    // Encontrar resultado correspondente
-    let resultado = null;
-    for (let key in teste.resultados) {
-        const range = teste.resultados[key];
-        if (pontuacao >= range.min && pontuacao <= range.max) {
-            resultado = range;
-            break;
+    mostrarModal() {
+        this.elementos.testeModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    fecharModal() {
+        this.elementos.testeModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    fecharResultado() {
+        this.elementos.resultadoModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    mostrarPergunta() {
+        const teste = TESTES_PSICOLOGICOS[this.testeAtual];
+        const pergunta = teste.perguntas[this.perguntaAtual];
+        const totalPerguntas = teste.perguntas.length;
+        
+        // Atualizar progresso
+        const percentual = ((this.perguntaAtual + 1) / totalPerguntas) * 100;
+        this.elementos.progressoFill.style.width = `${percentual}%`;
+        this.elementos.progressoTexto.textContent = `${this.perguntaAtual + 1} de ${totalPerguntas}`;
+        
+        // Atualizar pergunta
+        this.elementos.perguntaTexto.textContent = pergunta.pergunta;
+        
+        // Renderizar opções
+        this.renderizarOpcoes(pergunta.opcoes);
+        
+        // Atualizar botões de navegação
+        this.atualizarBotoesNavegacao(totalPerguntas);
+    }
+    
+    renderizarOpcoes(opcoes) {
+        this.elementos.respostasContainer.innerHTML = '';
+        
+        opcoes.forEach((opcao, index) => {
+            const button = document.createElement('button');
+            button.className = 'resposta-option';
+            button.textContent = opcao;
+            button.onclick = () => this.selecionarResposta(index, button);
+            
+            // Manter seleção anterior
+            if (this.respostas[this.perguntaAtual] === index) {
+                button.classList.add('selected');
+            }
+            
+            this.elementos.respostasContainer.appendChild(button);
+        });
+    }
+    
+    atualizarBotoesNavegacao(totalPerguntas) {
+        const isFirstQuestion = this.perguntaAtual === 0;
+        const isLastQuestion = this.perguntaAtual === totalPerguntas - 1;
+        const hasAnswer = this.respostas[this.perguntaAtual] !== undefined;
+        
+        this.elementos.btnAnterior.style.display = isFirstQuestion ? 'none' : 'block';
+        this.elementos.btnProximo.style.display = isLastQuestion ? 'none' : 'block';
+        this.elementos.btnFinalizar.style.display = isLastQuestion ? 'block' : 'none';
+        
+        this.elementos.btnProximo.disabled = !hasAnswer;
+        this.elementos.btnFinalizar.disabled = !hasAnswer;
+    }
+    
+    selecionarResposta(index, button) {
+        this.respostas[this.perguntaAtual] = index;
+        
+        // Atualizar UI
+        document.querySelectorAll('.resposta-option').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        button.classList.add('selected');
+        
+        // Habilitar navegação
+        this.elementos.btnProximo.disabled = false;
+        this.elementos.btnFinalizar.disabled = false;
+    }
+    
+    proximaPergunta() {
+        const teste = TESTES_PSICOLOGICOS[this.testeAtual];
+        if (this.perguntaAtual < teste.perguntas.length - 1) {
+            this.perguntaAtual++;
+            this.mostrarPergunta();
         }
     }
     
-    // Mostrar resultado
-    mostrarResultado(resultado, pontuacao, teste.perguntas.length);
+    perguntaAnterior() {
+        if (this.perguntaAtual > 0) {
+            this.perguntaAtual--;
+            this.mostrarPergunta();
+        }
+    }
+    
+    finalizarTeste() {
+        const teste = TESTES_PSICOLOGICOS[this.testeAtual];
+        const pontuacao = this.calcularPontuacao();
+        const resultado = this.encontrarResultado(teste.resultados, pontuacao);
+        
+        this.mostrarResultado(resultado, pontuacao, teste.perguntas.length);
+    }
+    
+    calcularPontuacao() {
+        return this.respostas.reduce((total, resposta) => total + resposta, 0);
+    }
+    
+    encontrarResultado(resultados, pontuacao) {
+        for (let key in resultados) {
+            const range = resultados[key];
+            if (pontuacao >= range.min && pontuacao <= range.max) {
+                return range;
+            }
+        }
+        return null;
+    }
+    
+    mostrarResultado(resultado, pontuacao, totalPerguntas) {
+        this.fecharModal();
+        
+        const maxPontuacao = (totalPerguntas - 1) * 3;
+        
+        const html = `
+            <div class="resultado-titulo">${resultado.titulo}</div>
+            <div class="resultado-descricao">${resultado.descricao}</div>
+            <div class="resultado-recomendacao">
+                <h4>Importante:</h4>
+                <p>Este é um teste de rastreio e não substitui uma avaliação profissional. Para um diagnóstico preciso, consulte um psicólogo ou psiquiatra.</p>
+            </div>
+            <div style="margin-top: 1.5rem; font-size: 0.95rem; color: #666; font-weight: 500;">
+                Sua pontuação: ${pontuacao} de ${maxPontuacao}
+            </div>
+        `;
+        
+        this.elementos.resultadoConteudo.innerHTML = html;
+        this.elementos.resultadoModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
 }
 
-function mostrarResultado(resultado, pontuacao, totalPerguntas) {
-    fecharModal();
-    
-    const resultadoHTML = `
-        <div class="resultado-titulo">${resultado.titulo}</div>
-        <div class="resultado-descricao">${resultado.descricao}</div>
-        <div class="resultado-recomendacao">
-            <h4>Importante:</h4>
-            <p>Este é um teste de rastreio e não substitui uma avaliação profissional. Para um diagnóstico preciso, consulte um psicólogo ou psiquiatra.</p>
-        </div>
-        <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-            Sua pontuação: ${pontuacao} de ${(totalPerguntas - 1) * 3}
-        </div>
-    `;
-    
-    document.getElementById('resultado-conteudo').innerHTML = resultadoHTML;
-    document.getElementById('resultadoModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
+
+/* ============================================
+   FUNÇÕES GLOBAIS (compatibilidade)
+   ============================================ */
+let gerenciador;
+
+document.addEventListener('DOMContentLoaded', () => {
+    gerenciador = new GerenciadorTestes();
+});
+
+function iniciarTeste(tipo) {
+    gerenciador.iniciarTeste(tipo);
+}
+
+function proximaPergunta() {
+    gerenciador.proximaPergunta();
+}
+
+function perguntaAnterior() {
+    gerenciador.perguntaAnterior();
+}
+
+function finalizarTeste() {
+    gerenciador.finalizarTeste();
 }
 
 function fecharModal() {
-    document.getElementById('testeModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    gerenciador.fecharModal();
 }
 
 function fecharResultado() {
-    document.getElementById('resultadoModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    gerenciador.fecharResultado();
 }
 
 function agendarConsulta() {
-    fecharResultado();
+    gerenciador.fecharResultado();
     window.location.href = 'tel:+55-61992558044';
 }
 
-// Fechar modais ao clicar fora
-window.onclick = function(event) {
-    const testeModal = document.getElementById('testeModal');
-    const resultadoModal = document.getElementById('resultadoModal');
-    
-    if (event.target === testeModal) {
-        fecharModal();
-    }
-    if (event.target === resultadoModal) {
-        fecharResultado();
-    }
-}
-
-// Fechar com ESC
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        fecharModal();
-        fecharResultado();
-    }
-});
-
-console.log('Sistema de Testes Psicológicos - Carregado com sucesso');
+console.log('✓ Sistema de Testes Psicológicos carregado com sucesso');

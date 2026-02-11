@@ -1,87 +1,171 @@
-// Mobile Navigation Toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggler = document.getElementById('navbarToggler');
-    const navbarNav = document.getElementById('navbarNav');
+/* ============================================
+   CONFIGURAÇÃO & CONSTANTES
+   ============================================ */
+const CONFIG = {
+    HEADER_SCROLL_THRESHOLD: 100,
+    OBSERVER_THRESHOLD: 0.1,
+    OBSERVER_ROOT_MARGIN: '0px 0px -50px 0px',
+    ANIMATION_DURATION: 600
+};
+
+const SELECTORS = {
+    navbarToggler: '#navbarToggler',
+    navbarNav: '#navbarNav',
+    navLinks: '.nav-link',
+    header: '.header',
+    anchorLinks: 'a[href^="#"]',
+    animatedCards: '.service-card, .article-card, .teste-card'
+};
+
+
+/* ============================================
+   MOBILE NAVIGATION
+   ============================================ */
+class MobileNavigation {
+    constructor() {
+        this.toggler = document.getElementById('navbarToggler');
+        this.nav = document.getElementById('navbarNav');
+        this.links = document.querySelectorAll(SELECTORS.navLinks);
+        
+        if (this.toggler && this.nav) {
+            this.init();
+        }
+    }
     
-    if (navbarToggler && navbarNav) {
-        navbarToggler.addEventListener('click', function() {
-            navbarNav.classList.toggle('active');
-            this.classList.toggle('active');
+    init() {
+        this.toggler.addEventListener('click', () => this.toggle());
+        this.links.forEach(link => {
+            link.addEventListener('click', () => this.close());
+        });
+        document.addEventListener('click', (e) => this.handleOutsideClick(e));
+    }
+    
+    toggle() {
+        this.nav.classList.toggle('active');
+        this.toggler.classList.toggle('active');
+    }
+    
+    close() {
+        this.nav.classList.remove('active');
+        this.toggler.classList.remove('active');
+    }
+    
+    handleOutsideClick(event) {
+        if (!this.toggler.contains(event.target) && !this.nav.contains(event.target)) {
+            this.close();
+        }
+    }
+}
+
+
+/* ============================================
+   SMOOTH SCROLL
+   ============================================ */
+class SmoothScroll {
+    constructor() {
+        this.header = document.querySelector(SELECTORS.header);
+        this.init();
+    }
+    
+    init() {
+        document.querySelectorAll(SELECTORS.anchorLinks).forEach(anchor => {
+            anchor.addEventListener('click', (e) => this.handleClick(e));
         });
     }
     
-    // Close mobile menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navbarNav.classList.remove('active');
-            navbarToggler.classList.remove('active');
-        });
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!navbarToggler.contains(event.target) && !navbarNav.contains(event.target)) {
-            navbarNav.classList.remove('active');
-            navbarToggler.classList.remove('active');
-        }
-    });
-    
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Add scroll effect to header
-    let lastScroll = 0;
-    const header = document.querySelector('.header');
-    
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
+    handleClick(e) {
+        e.preventDefault();
+        const target = document.querySelector(e.currentTarget.getAttribute('href'));
         
-        if (currentScroll > 100) {
-            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-        } else {
-            header.style.boxShadow = 'none';
+        if (target) {
+            const headerHeight = this.header?.offsetHeight || 0;
+            const targetPosition = target.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         }
+    }
+}
+
+
+/* ============================================
+   HEADER SCROLL EFFECT
+   ============================================ */
+class HeaderScrollEffect {
+    constructor() {
+        this.header = document.querySelector(SELECTORS.header);
+        if (this.header) {
+            this.init();
+        }
+    }
+    
+    init() {
+        let lastScroll = 0;
         
-        lastScroll = currentScroll;
-    });
-    
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            this.header.style.boxShadow = currentScroll > CONFIG.HEADER_SCROLL_THRESHOLD
+                ? '0 2px 10px rgba(0,0,0,0.1)'
+                : 'none';
+            
+            lastScroll = currentScroll;
         });
-    }, observerOptions);
+    }
+}
+
+
+/* ============================================
+   INTERSECTION OBSERVER (ANIMAÇÕES)
+   ============================================ */
+class CardAnimations {
+    constructor() {
+        this.init();
+    }
     
-    // Observe service cards and article cards
-    document.querySelectorAll('.service-card, .article-card, .teste-card').forEach(card => {
+    init() {
+        const options = {
+            threshold: CONFIG.OBSERVER_THRESHOLD,
+            rootMargin: CONFIG.OBSERVER_ROOT_MARGIN
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateCard(entry.target);
+                }
+            });
+        }, options);
+        
+        document.querySelectorAll(SELECTORS.animatedCards).forEach(card => {
+            this.prepareCard(card);
+            observer.observe(card);
+        });
+    }
+    
+    prepareCard(card) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
-});
+        card.style.transition = `opacity ${CONFIG.ANIMATION_DURATION}ms ease, transform ${CONFIG.ANIMATION_DURATION}ms ease`;
+    }
+    
+    animateCard(card) {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+    }
+}
 
-console.log('Site do Psicólogo André Lemos - Carregado com sucesso');
+
+/* ============================================
+   INICIALIZAÇÃO
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    new MobileNavigation();
+    new SmoothScroll();
+    new HeaderScrollEffect();
+    new CardAnimations();
+    
+    console.log('✓ Site carregado com sucesso');
+});
